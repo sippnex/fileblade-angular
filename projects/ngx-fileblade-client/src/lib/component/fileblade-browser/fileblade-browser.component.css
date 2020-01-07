@@ -1,0 +1,66 @@
+.control-bar {
+  min-height: 60px;
+}
+
+.current-path {
+  padding: 5px 10px;
+  word-break: break-all;
+}
+
+.navigation-controls {
+  width: 100%;
+  padding: 10px;
+  background-color: #dadee1;
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
+
+.browse-item-controls {
+  width: 100%;
+  padding: 10px;
+  background-color: #c3dee1;
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
+
+.browse-item-control-btn {
+  margin-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.browse-item-control-close-btn {
+  float: right;
+}
+
+.browser-item {
+  width: 100%;
+  padding: 25px;
+  cursor: pointer;
+}
+
+.browser-item:hover {
+  background-color: #e1e1e1;
+  border-radius: 5px;
+}
+
+.browser-item.selected {
+  background-color: #c3dee1;
+  border-radius: 5px;
+}
+
+.browser-item-icon-wrapper {
+  width: 100%;
+  padding: 10px 0;
+}
+
+.browser-item-icon {
+  width: 100%;
+  max-height: 150px;
+}
+
+.browser-item-name {
+  width: 100%;
+  text-align: center;
+  word-break: break-all;
+}

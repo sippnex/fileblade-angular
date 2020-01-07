@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>
+  {{data.message}}
+  <button mat-icon-button class="button-close" (click)="close()"><mat-icon>close</mat-icon></button>
+</h1>
+<div mat-dialog-content>
+  <lib-fileblade-browser [mode]="{name: 'select-directory'}"
+                         (onDirectorySelected)="directorySelected($event)"
+                         (onCloseDialog)="close()">
+  </lib-fileblade-browser>
+</div>

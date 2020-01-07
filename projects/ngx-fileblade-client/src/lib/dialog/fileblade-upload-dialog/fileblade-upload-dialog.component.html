@@ -1,0 +1,7 @@
+<h1 mat-dialog-title>
+  Fileblade Upload
+  <button mat-icon-button class="button-close" (click)="close()"><mat-icon>close</mat-icon></button>
+</h1>
+<div mat-dialog-content>
+  <lib-fileblade-upload [path]="data.path" (onCloseDialog)="close()"></lib-fileblade-upload>
+</div>

@@ -1,0 +1,120 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="control-bar">
+
+        <div class="browse-item-controls" *ngIf="directorySelected">
+          <div class="current-path" *ngIf="currentDirectory">{{currentDirectory.path}}</div>
+          <button mat-raised-button class="browse-item-control-btn" *ngIf="mode.name == 'select-directory'"
+                  (click)="returnDirectory(selectedDirectory)">
+            <mat-icon>touch_app</mat-icon>
+            Select
+          </button>
+          <button mat-raised-button class="browse-item-control-btn" (click)="loadDirectory(selectedDirectory.path)">
+            <mat-icon>open_in_new</mat-icon>
+            Open
+          </button>
+          <button mat-raised-button class="browse-item-control-btn">
+            <mat-icon>edit</mat-icon>
+            Rename
+          </button>
+          <button mat-raised-button class="browse-item-control-btn" (click)="prepareMoveItem(selectedDirectory)">
+            <mat-icon>file_copy</mat-icon>
+            Move
+          </button>
+          <button mat-raised-button class="browse-item-control-btn">
+            <mat-icon>delete</mat-icon>
+            Delete
+          </button>
+          <button mat-icon-button class="browse-item-control-close-btn" (click)="unselectAll()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <div class="browse-item-controls" *ngIf="fileSelected">
+          <div class="current-path" *ngIf="currentDirectory">{{currentDirectory.path}}</div>
+          <button mat-raised-button class="browse-item-control-btn" *ngIf="mode.name == 'select-file'"
+                  (click)="returnFile(selectedFile)">
+            <mat-icon>touch_app</mat-icon>
+            Select
+          </button>
+          <button mat-raised-button class="browse-item-control-btn" (click)="openFile(selectedFile)">
+            <mat-icon>cloud_download</mat-icon>
+            Download
+          </button>
+          <button mat-raised-button class="browse-item-control-btn">
+            <mat-icon>edit</mat-icon>
+            Rename
+          </button>
+          <button mat-raised-button class="browse-item-control-btn" (click)="prepareMoveItem(selectedFile)">
+            <mat-icon>file_copy</mat-icon>
+            Move
+          </button>
+          <button mat-raised-button class="browse-item-control-btn">
+            <mat-icon>delete</mat-icon>
+            Delete
+          </button>
+          <button mat-icon-button class="browse-item-control-close-btn" (click)="unselectAll()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <div class="navigation-controls" *ngIf="!directorySelected && !fileSelected">
+          <div class="current-path" *ngIf="currentDirectory">{{currentDirectory.path}}</div>
+          <button mat-raised-button class="browse-item-control-btn" *ngIf="currentDirectory && currentDirectory.path !== '/'" (click)="directoryUp()">
+            <mat-icon>arrow_back</mat-icon>
+            Back
+          </button>
+          <button mat-raised-button class="browse-item-control-btn" (click)="uploadFile()">
+            <mat-icon>cloud_upload</mat-icon>
+            Upload
+          </button>
+          <button mat-raised-button class="browse-item-control-btn" (click)="createDirectory()">
+            <mat-icon>create_new_folder</mat-icon>
+            Create Directory
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="container" *ngIf="currentDirectory">
+          <div class="row">
+            <div class="empty-message"
+                 *ngIf="currentDirectory && !(mode.name == 'select-directory' && currentDirectory.path == '/') && currentDirectory.elements.length == 0">
+              This directory is empty
+            </div>
+            <div class="col-md-3" *ngIf="mode.name == 'select-directory' && currentDirectory && currentDirectory.path == '/'">
+              <div class="browser-item" [ngClass]="{'selected': rootDirectorySelected}" (click)="selectRootElement()">
+                <div class="browser-item-icon-wrapper">
+                  <img class="browser-item-icon"
+                       src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU4IDU4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1OCA1ODsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiNFRkNFNEE7IiBkPSJNNDYuMzI0LDUyLjVIMS41NjVjLTEuMDMsMC0xLjc3OS0wLjk3OC0xLjUxLTEuOTczbDEwLjE2Ni0yNy44NzEgIGMwLjE4NC0wLjY4MiwwLjgwMy0xLjE1NiwxLjUxLTEuMTU2SDU2LjQ5YzEuMDMsMCwxLjUxLDAuOTg0LDEuNTEsMS45NzNMNDcuODM0LDUxLjM0NEM0Ny42NSw1Mi4wMjYsNDcuMDMxLDUyLjUsNDYuMzI0LDUyLjV6Ii8+CjxnPgoJPHBhdGggc3R5bGU9ImZpbGw6I0VCQkExNjsiIGQ9Ik01MC4yNjgsMTIuNUgyNWwtNS03SDEuNzMyQzAuNzc2LDUuNSwwLDYuMjc1LDAsNy4yMzJWNDkuOTZjMC4wNjksMC4wMDIsMC4xMzgsMC4wMDYsMC4yMDUsMC4wMSAgIGwxMC4wMTUtMjcuMzE0YzAuMTg0LTAuNjgzLDAuODAzLTEuMTU2LDEuNTEtMS4xNTZINTJ2LTcuMjY4QzUyLDEzLjI3NSw1MS4yMjQsMTIuNSw1MC4yNjgsMTIuNXoiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K"/>
+                </div>
+                <div class="browser-item-name">/</div>
+              </div>
+            </div>
+            <div class="col-md-3" *ngFor="let element of currentDirectory.elements">
+              <div class="browser-item" *ngIf="element.directory" [ngClass]="{'selected': element.selected}"
+                   (click)="selectElement(element)" (dblclick)="loadDirectory(element.path)">
+                <div class="browser-item-icon-wrapper">
+                  <img class="browser-item-icon"
+                       src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU4IDU4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1OCA1ODsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiNFRkNFNEE7IiBkPSJNNDYuMzI0LDUyLjVIMS41NjVjLTEuMDMsMC0xLjc3OS0wLjk3OC0xLjUxLTEuOTczbDEwLjE2Ni0yNy44NzEgIGMwLjE4NC0wLjY4MiwwLjgwMy0xLjE1NiwxLjUxLTEuMTU2SDU2LjQ5YzEuMDMsMCwxLjUxLDAuOTg0LDEuNTEsMS45NzNMNDcuODM0LDUxLjM0NEM0Ny42NSw1Mi4wMjYsNDcuMDMxLDUyLjUsNDYuMzI0LDUyLjV6Ii8+CjxnPgoJPHBhdGggc3R5bGU9ImZpbGw6I0VCQkExNjsiIGQ9Ik01MC4yNjgsMTIuNUgyNWwtNS03SDEuNzMyQzAuNzc2LDUuNSwwLDYuMjc1LDAsNy4yMzJWNDkuOTZjMC4wNjksMC4wMDIsMC4xMzgsMC4wMDYsMC4yMDUsMC4wMSAgIGwxMC4wMTUtMjcuMzE0YzAuMTg0LTAuNjgzLDAuODAzLTEuMTU2LDEuNTEtMS4xNTZINTJ2LTcuMjY4QzUyLDEzLjI3NSw1MS4yMjQsMTIuNSw1MC4yNjgsMTIuNXoiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K"/>
+                </div>
+                <div class="browser-item-name">{{element.name}}</div>
+              </div>
+              <div class="browser-item" *ngIf="!element.directory" [ngClass]="{'selected': element.selected}"
+                   (click)="selectElement(element)">
+                <div class="browser-item-icon-wrapper">
+                  <img class="browser-item-icon"
+                       src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU4IDU4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1OCA1ODsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+Cjxwb2x5Z29uIHN0eWxlPSJmaWxsOiNFREVBREE7IiBwb2ludHM9IjUxLjUsMTQgMzcuNSwwIDYuNSwwIDYuNSw1OCA1MS41LDU4ICIvPgo8Zz4KCTxwYXRoIHN0eWxlPSJmaWxsOiNDRUM5QUU7IiBkPSJNMTYuNSwyM2gyNWMwLjU1MiwwLDEtMC40NDcsMS0xcy0wLjQ0OC0xLTEtMWgtMjVjLTAuNTUyLDAtMSwwLjQ0Ny0xLDFTMTUuOTQ4LDIzLDE2LjUsMjN6Ii8+Cgk8cGF0aCBzdHlsZT0iZmlsbDojQ0VDOUFFOyIgZD0iTTE2LjUsMTVoMTBjMC41NTIsMCwxLTAuNDQ3LDEtMXMtMC40NDgtMS0xLTFoLTEwYy0wLjU1MiwwLTEsMC40NDctMSwxUzE1Ljk0OCwxNSwxNi41LDE1eiIvPgoJPHBhdGggc3R5bGU9ImZpbGw6I0NFQzlBRTsiIGQ9Ik00MS41LDI5aC0yNWMtMC41NTIsMC0xLDAuNDQ3LTEsMXMwLjQ0OCwxLDEsMWgyNWMwLjU1MiwwLDEtMC40NDcsMS0xUzQyLjA1MiwyOSw0MS41LDI5eiIvPgoJPHBhdGggc3R5bGU9ImZpbGw6I0NFQzlBRTsiIGQ9Ik00MS41LDM3aC0yNWMtMC41NTIsMC0xLDAuNDQ3LTEsMXMwLjQ0OCwxLDEsMWgyNWMwLjU1MiwwLDEtMC40NDcsMS0xUzQyLjA1MiwzNyw0MS41LDM3eiIvPgoJPHBhdGggc3R5bGU9ImZpbGw6I0NFQzlBRTsiIGQ9Ik00MS41LDQ1aC0yNWMtMC41NTIsMC0xLDAuNDQ3LTEsMXMwLjQ0OCwxLDEsMWgyNWMwLjU1MiwwLDEtMC40NDcsMS0xUzQyLjA1Miw0NSw0MS41LDQ1eiIvPgo8L2c+Cjxwb2x5Z29uIHN0eWxlPSJmaWxsOiNDRUM5QUU7IiBwb2ludHM9IjM3LjUsMCAzNy41LDE0IDUxLjUsMTQgIi8+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo="/>
+                </div>
+                <div class="browser-item-name">{{element.name}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

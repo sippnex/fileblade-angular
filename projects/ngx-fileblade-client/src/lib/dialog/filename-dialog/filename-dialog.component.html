@@ -1,0 +1,7 @@
+<form>
+  <mat-form-field class="full-width">
+    <input #input matInput [placeholder]="data.placeholder" [value]="data.value">
+  </mat-form-field>
+  <button mat-raised-button type="reset" class="button-cancel" (click)="cancel($event)">Cancel</button>
+  <button mat-raised-button color="primary" class="button-ok" (click)="save($event, input.value)">Ok</button>
+</form>

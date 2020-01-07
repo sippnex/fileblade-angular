@@ -1,0 +1,12 @@
+.full-width {
+  width: 100%;
+}
+
+.file-icon {
+  cursor: pointer;
+  transition: all .25s;
+}
+
+.file-icon:hover {
+  transform: scale(1.4);
+}
