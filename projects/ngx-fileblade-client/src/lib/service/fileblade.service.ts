@@ -42,6 +42,10 @@ export class FilebladeService {
     return this.http.put(this.config.url + '/fileblade/browse' + sourcePath, formData);
   }
 
+  public deleteElement(path: string): Observable<any> {
+    return this.http.delete(this.config.url + '/fileblade/browse' + path);
+  }
+
   public uploadFiles(fbFiles: FbFile[]): Observable<boolean> {
 
     const successSubject: Subject<boolean> = new Subject<boolean>();
@@ -60,13 +64,13 @@ export class FilebladeService {
   }
 
   public getDownloadUrl(file: FbFile) {
-    return this.config.url + '/fileblade/files' + file.path;
+    return this.config.url + '/fileblade/download' + file.path;
   }
 
   private uploadFile(fbFile: FbFile): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', fbFile.content);
-    return this.http.post(this.config.url + '/fileblade/files' + fbFile.path, formData);
+    return this.http.post(this.config.url + '/fileblade/upload' + fbFile.path, formData);
   }
 
   /*private uploadFile(file: File, parentDirectoryId: number): Observable<boolean> {

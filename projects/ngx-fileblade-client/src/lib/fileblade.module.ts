@@ -13,8 +13,11 @@ import {FilenameDialogComponent} from './dialog/filename-dialog/filename-dialog.
 import {FilebladeSelectFileDialogComponent} from './dialog/fileblade-select-file-dialog/fileblade-select-file-dialog.component';
 import { FilebladeSelectDirectoryDialogComponent } from './dialog/fileblade-select-directory-dialog/fileblade-select-directory-dialog.component';
 import {FilebladeUploadDialogComponent} from './dialog/fileblade-upload-dialog/fileblade-upload-dialog.component';
+import {FilebladeRenameItemDialogComponent} from './dialog/fileblade-rename-item-dialog/fileblade-rename-item-dialog.component';
 import {FilebladeService} from './service/fileblade.service';
 import {FilebladeConfig} from './model/fileblade-config';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {FilebladeDeleteItemDialogComponent} from './dialog/fileblade-delete-item-dialog/fileblade-delete-item-dialog.component';
 
 @NgModule({
   imports: [
@@ -22,6 +25,7 @@ import {FilebladeConfig} from './model/fileblade-config';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
@@ -36,6 +40,8 @@ import {FilebladeConfig} from './model/fileblade-config';
     FilenameDialogComponent,
     FilebladeSelectFileDialogComponent,
     FilebladeSelectDirectoryDialogComponent,
+    FilebladeRenameItemDialogComponent,
+    FilebladeDeleteItemDialogComponent,
     FilebladeUploadDialogComponent,
     FilebladeBrowserDirective,
     FilebladeInputComponent,
@@ -47,6 +53,8 @@ import {FilebladeConfig} from './model/fileblade-config';
     FilenameDialogComponent,
     FilebladeSelectFileDialogComponent,
     FilebladeSelectDirectoryDialogComponent,
+    FilebladeRenameItemDialogComponent,
+    FilebladeDeleteItemDialogComponent,
     FilebladeUploadDialogComponent,
     FilebladeBrowserDirective,
     FilebladeInputComponent
@@ -56,7 +64,9 @@ import {FilebladeConfig} from './model/fileblade-config';
     FilenameDialogComponent,
     FilebladeUploadDialogComponent,
     FilebladeSelectFileDialogComponent,
-    FilebladeSelectDirectoryDialogComponent
+    FilebladeSelectDirectoryDialogComponent,
+    FilebladeRenameItemDialogComponent,
+    FilebladeDeleteItemDialogComponent
   ],
   providers: [
     FilebladeService

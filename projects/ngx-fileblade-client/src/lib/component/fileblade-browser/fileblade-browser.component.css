@@ -8,16 +8,14 @@
 }
 
 .navigation-controls {
-  width: 100%;
-  padding: 10px;
+  padding: 12px;
   background-color: #dadee1;
   border-radius: 5px;
   margin-bottom: 25px;
 }
 
 .browse-item-controls {
-  width: 100%;
-  padding: 10px;
+  padding: 12px;
   background-color: #c3dee1;
   border-radius: 5px;
   margin-bottom: 25px;
@@ -34,9 +32,9 @@
 }
 
 .browser-item {
-  width: 100%;
-  padding: 25px;
+  padding: 24px;
   cursor: pointer;
+  width: 250px;
 }
 
 .browser-item:hover {
@@ -50,17 +48,15 @@
 }
 
 .browser-item-icon-wrapper {
-  width: 100%;
   padding: 10px 0;
+  text-align: center;
 }
 
 .browser-item-icon {
-  width: 100%;
   max-height: 150px;
 }
 
 .browser-item-name {
-  width: 100%;
   text-align: center;
   word-break: break-all;
 }

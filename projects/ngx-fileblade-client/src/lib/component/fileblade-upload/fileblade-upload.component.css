@@ -48,10 +48,9 @@
 }
 
 .file-input-label {
-  margin-left: 50%;
+  margin-left: 40%;
   margin-top: 90px;
   margin-bottom: 90px;
-  transform: translateX(-50%);
   font-size: 1.1em;
   color: #919191;
 }

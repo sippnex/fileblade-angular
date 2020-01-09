@@ -7,6 +7,8 @@ import {FbDirectory} from '../../model/fb-directory';
 import {FbElement} from '../../model/fb-element';
 import {FbFile} from '../../model/fb-file';
 import {FilebladeSelectDirectoryDialogComponent} from '../../dialog/fileblade-select-directory-dialog/fileblade-select-directory-dialog.component';
+import {FilebladeRenameItemDialogComponent} from '../../dialog/fileblade-rename-item-dialog/fileblade-rename-item-dialog.component';
+import {FilebladeDeleteItemDialogComponent} from '../../dialog/fileblade-delete-item-dialog/fileblade-delete-item-dialog.component';
 
 @Component({
   selector: 'lib-fileblade-browser',
@@ -145,6 +147,42 @@ export class FilebladeBrowserComponent implements OnInit {
       this.filebladeService.moveElement(element.path, target).subscribe(() => {
         this.loadDirectory(this.currentDirectory.path);
       });
+    });
+  }
+
+  prepareRenameItem(element: FbElement) {
+    if (!this.currentDirectory) {
+      return;
+    }
+    this.dialog.open(FilebladeRenameItemDialogComponent, {
+      width: '350px',
+      data: {
+        message: 'Please type in a new name',
+        name: element.name
+      }
+    }).afterClosed().subscribe((name: string) => {
+      if (name) {
+        this.filebladeService.moveElement(element.path, this.currentDirectory.path + '/' + name).subscribe(() => {
+          this.loadDirectory(this.currentDirectory.path);
+        });
+      }
+    });
+  }
+
+  prepareDeleteItem(element: FbElement) {
+    if (!this.currentDirectory) {
+      return;
+    }
+    this.dialog.open(FilebladeDeleteItemDialogComponent, {
+      data: {
+        path: element.path
+      }
+    }).afterClosed().subscribe((deletionConfirmed: boolean) => {
+      if (deletionConfirmed) {
+        this.filebladeService.deleteElement(element.path).subscribe(() => {
+          this.loadDirectory(this.currentDirectory.path);
+        });
+      }
     });
   }
 

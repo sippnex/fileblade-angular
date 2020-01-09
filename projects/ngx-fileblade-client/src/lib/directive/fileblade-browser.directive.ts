@@ -19,8 +19,7 @@ export class FilebladeBrowserDirective {
 
   openFilebladeBrowserDialog(): void {
     this.dialog.open(FilebladeBrowserDialogComponent, {
-      width: '750px',
-      height: '650px'
+      width: '1240px'
     });
   }
 

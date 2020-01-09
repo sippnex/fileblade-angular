@@ -38,7 +38,7 @@ export class FilebladeUploadComponent {
         }
       }
       if (!exists) {
-        this.currentFiles.push(new FbFile(fileList[i].name, this.path + '/' + fileList[i].name, fileList[i]));
+        this.currentFiles.push(new FbFile(fileList[i].name, this.path + (this.path !== '/' ? '/' : '') + fileList[i].name, fileList[i]));
       } else {
         alert('File already selected!');
       }

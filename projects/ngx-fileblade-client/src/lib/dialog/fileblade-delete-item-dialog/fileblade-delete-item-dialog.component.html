@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>
+  Do you really want to delete the Item?
+</h1>
+<div mat-dialog-content>
+  <p>
+    Are you sure you want to delete the following item?
+    <b>{{ path }}</b>
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="close(false)" cdkFocusInitial>Cancel</button>
+  <button mat-raised-button color="warn" (click)="close(true)">Delete</button>
+</div>
