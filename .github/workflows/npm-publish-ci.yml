@@ -15,7 +15,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm install
       - run: npm run build-lib
-      - run: cd dist/ngx-fileblade-client
-      - run: npm publish
+      - run: npm publish dist/ngx-fileblade-client
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
