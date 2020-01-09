@@ -1,7 +1,7 @@
 {
   "name": "ngx-fileblade-client",
   "description": "The Angular client-side library for the fileblade framework. A web filemanager",
-  "version": "0.3.0",
+  "version": "0.7.0",
   "author": "sippnex",
   "repository": {
     "type": "git",
